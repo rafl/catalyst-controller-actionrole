@@ -1,6 +1,8 @@
-package TestApp::Action::Role::Moo;
+package Catalyst::Action::Role::Moo;
 
 use Moose::Role;
+
+use namespace::clean -except => 'meta';
 
 after execute => sub {
     my ($self, $controller, $c) = @_;
