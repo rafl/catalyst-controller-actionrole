@@ -47,7 +47,7 @@ sub create_action {
         $class = $meta->name;
     }
 
-    return $class->new(%args);
+    return $class->new(\%args);
 }
 
 sub _parse_Does_attr {
