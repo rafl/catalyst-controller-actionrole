@@ -58,14 +58,23 @@ without specifying the C<Does> keyword in every action definition:
 
 =attr _action_role_prefix
 
-This attribute stores a string that is going to be prepended to all role names
-if they aren't prefixed with C<+> or C<~>. It defaults to
+This class attribute stores a string that is going to be prepended to all role
+names if they aren't prefixed with C<+> or C<~>. It defaults to
 C<Catalyst::Action::Role::>.
 
 =cut
 
 __PACKAGE__->mk_classdata(qw/_action_role_prefix/);
 __PACKAGE__->_action_role_prefix('Catalyst::Action::Role::');
+
+=attr _action_roles
+
+This attribute stores an array reference of role names that will be applied to
+every action of this controller. It can be set by passing a C<action_roles>
+argument to the constructor. The same expansions as for C<Does> will be
+performed.
+
+=cut
 
 has _action_roles => (
     is         => 'ro',
