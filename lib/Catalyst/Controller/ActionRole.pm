@@ -1,6 +1,3 @@
-use strict;
-use warnings;
-
 package Catalyst::Controller::ActionRole;
 
 use Moose;
