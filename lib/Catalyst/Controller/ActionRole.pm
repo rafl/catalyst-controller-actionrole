@@ -33,6 +33,19 @@ prefixed with C<~>, the name of your application followed by
 C<::Action::Role::> is prepended. If it isn't prefixed with C<+> or C<~>,
 the value of the C<_action_role_prefix> attribute will be prepended.
 
+Additionally it's possible to to apply roles to B<all> actions of a controller
+without specifying the C<Does> keyword in every action definition:
+
+    package MyApp::Controller::Bar
+
+    use parent qw/Catalyst::Controller::ActionRole/;
+
+    __PACKAGE__->config(
+        action_roles => ['Foo', '~Bar'],
+    );
+
+    sub moo : Local { ... } # has Catalyst::Action::Role::Foo and MyApp::Action::Role::Bar applied
+
 =attr _action_role_prefix
 
 This attribute stores a string that is going to be prepended to all role names
