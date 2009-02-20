@@ -4,6 +4,6 @@ use Moose;
 
 BEGIN { extends 'Catalyst::Controller::ActionRole'; }
 
-sub bar : Local MyActionRole('Moo') {}
+sub bar : Local Does('~Moo') {}
 
 1;

@@ -35,7 +35,7 @@ sub create_action {
 
     Class::MOP::load_class($class);
 
-    my @roles = @{ $args{attributes}->{ActionRole} || [] };
+    my @roles = @{ $args{attributes}->{Does} || [] };
     if (@roles) {
         Class::MOP::load_class($_) for @roles;
         my $meta = find_meta($class)->create_anon_class(
@@ -50,17 +50,14 @@ sub create_action {
     return $class->new(%args);
 }
 
-sub _parse_ActionRole_attr {
+sub _parse_Does_attr {
     my ($self, $app, $name, $value) = @_;
-    return ActionRole => String::RewritePrefix->rewrite(
-        { '' => $self->_action_role_prefix, '+' => '' },
+    return Does => String::RewritePrefix->rewrite(
+        { ''  => $self->_action_role_prefix,
+          '~' => (blessed($app) || $app) . '::Action::Role::',
+          '+' => '' },
         $value,
     );
-}
-
-sub _parse_MyActionRole_attr {
-    my ($self, $app, $name, $value) = @_;
-    return ActionRole => (blessed($app) || $app) . '::Action::Role::' . $value;
 }
 
 1;
