@@ -5,9 +5,9 @@ package Catalyst::Controller::ActionRole;
 
 use Moose;
 use Class::MOP;
+use Moose::Meta::Class;
 use String::RewritePrefix;
 use MooseX::Types::Moose qw/Str/;
-use Moose::Util qw/find_meta/;
 
 use namespace::clean -except => 'meta';
 
@@ -38,7 +38,7 @@ sub create_action {
     my @roles = @{ $args{attributes}->{Does} || [] };
     if (@roles) {
         Class::MOP::load_class($_) for @roles;
-        my $meta = find_meta($class)->create_anon_class(
+        my $meta = Moose::Meta::Class->initialize($class)->create_anon_class(
             superclasses => [$class],
             roles        => \@roles,
             cache        => 1,
