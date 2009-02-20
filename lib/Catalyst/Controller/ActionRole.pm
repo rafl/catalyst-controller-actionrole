@@ -49,24 +49,16 @@ without specifying the C<Does> keyword in every action definition:
 =attr _action_role_prefix
 
 This attribute stores a string that is going to be prepended to all role names
-if they aren't prefixed with C<+> or C<~>. It's built using the
-C<_build__action_role_prefix> method by appending C<::Role::> to the
-controllers C<_action_class>.
+if they aren't prefixed with C<+> or C<~>. It defaults to
+C<Catalyst::Action::Role::>.
 
 =cut
 
 has _action_role_prefix => (
     is      => 'ro',
     isa     => Str,
-    lazy    => 1,
-    builder => '_build__action_role_prefix',
+    default => 'Catalyst::Action::Role::',
 );
-
-sub _build__action_role_prefix {
-    my ($self) = @_;
-    my $action_class = $self->_action_class;
-    return qq{${action_class}::Role::};
-}
 
 override BUILDARGS => sub {
     my ($self) = @_;
