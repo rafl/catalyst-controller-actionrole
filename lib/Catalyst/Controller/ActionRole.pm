@@ -54,29 +54,26 @@ C<Catalyst::Action::Role::>.
 
 =cut
 
-has _action_role_prefix => (
-    is      => 'ro',
-    isa     => Str,
-    default => 'Catalyst::Action::Role::',
+__PACKAGE__->mk_classdata(qw/_action_role_prefix/);
+__PACKAGE__->_action_role_prefix('Catalyst::Action::Role::');
+
+has _action_roles => (
+    is         => 'ro',
+    isa        => ArrayRef[RoleName],
+    init_arg   => 'action_roles',
+    auto_deref => 1,
 );
 
 override BUILDARGS => sub {
     my ($self) = @_;
     my $args = super;
-    if (my $roles = delete $args->{action_roles}) {
+    if (my $roles = $args->{action_roles}) {
         my @roles = $self->_expand_role_shortname(@{ $roles });
         Class::MOP::load_class($_) for @roles;
-        my $meta = find_meta($self)->create_anon_class(
-            superclasses => [$self->_action_class],
-            roles        => \@roles,
-            cache        => 1,
-        );
-        $meta->add_method(meta => sub { $meta });
-        $args->{_action_class} = $meta->name;
+        $args->{action_roles} = \@roles;
     }
     return $args;
 };
-
 
 sub create_action {
     my ($self, %args) = @_;
@@ -87,7 +84,7 @@ sub create_action {
 
     Class::MOP::load_class($class);
 
-    my @roles = @{ $args{attributes}->{Does} || [] };
+    my @roles = ($self->_action_roles, @{ $args{attributes}->{Does} || [] });
     if (@roles) {
         Class::MOP::load_class($_) for @roles;
         my $meta = Moose::Meta::Class->initialize($class)->create_anon_class(
