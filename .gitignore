@@ -1,3 +1,4 @@
 .*
 !.gitignore
 Catalyst-Controller-ActionRole-*
+Debian_CPANTS.txt
