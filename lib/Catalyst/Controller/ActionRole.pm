@@ -6,6 +6,7 @@ use Class::MOP;
 use Catalyst::Utils;
 use Moose::Meta::Class;
 use String::RewritePrefix;
+use Moose::Util qw/find_meta/;
 use MooseX::Types::Moose qw/Str/;
 
 use namespace::clean -except => 'meta';
@@ -53,6 +54,24 @@ sub _build__action_role_prefix {
     my $action_class = $self->_action_class;
     return qq{${action_class}::Role::};
 }
+
+override BUILDARGS => sub {
+    my ($self) = @_;
+    my $args = super;
+    if (my $roles = delete $args->{action_roles}) {
+        my @roles = $self->_expand_role_shortname(@{ $roles });
+        Class::MOP::load_class($_) for @roles;
+        my $meta = find_meta($self)->create_anon_class(
+            superclasses => [$self->_action_class],
+            roles        => \@roles,
+            cache        => 1,
+        );
+        $meta->add_method(meta => sub { $meta });
+        $args->{_action_class} = $meta->name;
+    }
+    return $args;
+};
+
 
 sub create_action {
     my ($self, %args) = @_;
