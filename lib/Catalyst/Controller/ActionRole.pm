@@ -3,6 +3,7 @@ package Catalyst::Controller::ActionRole;
 
 use Moose;
 use Class::MOP;
+use Catalyst::Utils;
 use Moose::Meta::Class;
 use String::RewritePrefix;
 use MooseX::Types::Moose qw/Str/;
@@ -77,14 +78,21 @@ sub create_action {
     return $class->new(\%args);
 }
 
+sub _expand_role_shortname {
+    my ($self, @shortnames) = @_;
+    my $app = Catalyst::Utils::class2appclass(blessed($self) || $self);
+
+    return String::RewritePrefix->rewrite(
+        { ''  => $self->_action_role_prefix,
+          '~' => qq{${app}::Action::Role::},
+          '+' => '' },
+        @shortnames,
+    );
+}
+
 sub _parse_Does_attr {
     my ($self, $app, $name, $value) = @_;
-    return Does => String::RewritePrefix->rewrite(
-        { ''  => $self->_action_role_prefix,
-          '~' => (blessed($app) || $app) . '::Action::Role::',
-          '+' => '' },
-        $value,
-    );
+    return Does => $self->_expand_role_shortname($value);
 }
 
 1;
