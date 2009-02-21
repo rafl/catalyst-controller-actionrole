@@ -83,6 +83,9 @@ has _action_roles => (
     auto_deref => 1,
 );
 
+# FIXME: this isn't what BUILDARGS was intended for. I guess the expansion
+# should be done in a trigger.
+
 override BUILDARGS => sub {
     my ($self) = @_;
     my $args = super;
