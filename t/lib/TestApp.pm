@@ -1,9 +1,10 @@
-use strict;
-use warnings;
-
 package TestApp;
 
-use parent qw/Catalyst/;
+use Moose;
+
+use namespace::clean -except => 'meta';
+
+extends 'Catalyst';
 
 __PACKAGE__->setup;
 
