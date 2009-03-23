@@ -104,7 +104,9 @@ sub create_action {
         ? $args{attributes}->{ActionClass}
         : $self->_action_class;
 
-    Class::MOP::load_class($class);
+    if ( ref $class eq 'ARRAY' ) { $class = $class->[0] }
+
+    Class::MOP::load_class( $class );
 
     my @roles = ($self->_action_roles, @{ $args{attributes}->{Does} || [] });
     if (@roles) {
