@@ -101,7 +101,7 @@ sub create_action {
     my ($self, %args) = @_;
 
     my $class = exists $args{attributes}->{ActionClass}
-        ? $args{attributes}->{ActionClass}
+        ? $args{attributes}->{ActionClass}->[0]
         : $self->_action_class;
 
     Class::MOP::load_class($class);
