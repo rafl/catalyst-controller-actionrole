@@ -1,3 +1,7 @@
+0.03  Sat, 28 Mar 2009 04:12:49 +0100
+  * Don't screw up ActionClass attributes.
+    - Add tests for this (Jason Kohles).
+
 0.02  Sat, 21 Feb 2009 02:08:40 +0100
   * Don't rely on parent being installed for the test suite.
 
