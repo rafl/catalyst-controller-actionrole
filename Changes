@@ -1,3 +1,8 @@
+0.04_01  Sun, 29 Mar 2009 13:28:24 +0200
+  * Remove moose component backward-compatibility hacks. Depend
+    on Catalyst 5.71001 instead, which should provide sufficient
+    backward-compat now.
+
 0.03  Sat, 28 Mar 2009 04:12:49 +0100
   * Don't screw up ActionClass attributes.
     - Add tests for this (Jason Kohles).
