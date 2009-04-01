@@ -1,9 +1,13 @@
+0.07  Wed, 01 Apr 2009 12:18:43 -0700
+  * Make empty prefix ('Foo') search MyApp::Action::Role before falling back to
+    Catalyst::Action::Role (hdp)
+
 0.06  Wed, 01 Apr 2009 16:29:37 +0200
   * Don't depend on parent.pm for the tests.
 
 0.05  Tue, 31 Mar 2009 00:27:54 +0200
   * Replace BUILDARGS hack that also doesn't work with
-    Catalyst-Runtime 5.71001 (Hans Dieter Pearcey).
+    Catalyst-Runtime 5.71001 (hdp)
 
 0.04_01  Sun, 29 Mar 2009 13:28:24 +0200
   * Remove moose component backward-compatibility hacks. Depend
