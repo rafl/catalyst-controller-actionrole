@@ -1,3 +1,6 @@
+0.06  Wed, 01 Apr 2009 16:29:37 +0200
+  * Don't depend on parent.pm for the tests.
+
 0.05  Tue, 31 Mar 2009 00:27:54 +0200
   * Replace BUILDARGS hack that also doesn't work with
     Catalyst-Runtime 5.71001 (Hans Dieter Pearcey).
