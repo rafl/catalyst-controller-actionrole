@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 9;
+use Test::More tests => 12;
 
 use FindBin;
 use lib "$FindBin::Bin/lib";
@@ -8,9 +8,10 @@ use lib "$FindBin::Bin/lib";
 use Catalyst::Test 'TestApp';
 
 my %roles = (
-    foo => 'Catalyst::Action::Role::Moo',
-    bar => 'TestApp::Action::Role::Moo',
-    baz => 'Moo',
+    foo  => 'TestApp::Action::Role::Moo',
+    bar  => 'TestApp::Action::Role::Moo',
+    baz  => 'Moo',
+    quux => 'Catalyst::Action::Role::Zoo',
 );
 
 while (my ($path, $role) = each %roles) {
