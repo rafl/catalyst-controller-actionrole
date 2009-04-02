@@ -1,3 +1,6 @@
+0.08  Thu, 02 Apr 2009 12:00:59 -0700
+  * Minor POD tweaks (hdp)
+
 0.07  Wed, 01 Apr 2009 12:18:43 -0700
   * Make empty prefix ('Foo') search MyApp::Action::Role before falling back to
     Catalyst::Action::Role (hdp)
