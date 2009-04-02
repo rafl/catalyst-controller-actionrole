@@ -32,7 +32,7 @@ prefixed with C<+>, it is assumed to be the full name of the role. If it's
 prefixed with C<~>, the name of your application followed by
 C<::Action::Role::> is prepended. If it isn't prefixed with C<+> or C<~>,
 the role name will be searched for in C<@INC> according to the rules for
-L</role prefix searching>.
+L<role prefix searching|/ROLE PREFIX SEARCHING>.
 
 Additionally it's possible to to apply roles to B<all> actions of a controller
 without specifying the C<Does> keyword in every action definition:
