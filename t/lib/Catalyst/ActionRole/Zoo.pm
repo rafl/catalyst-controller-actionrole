@@ -1,4 +1,4 @@
-package Catalyst::Action::Role::Moo;
+package Catalyst::ActionRole::Zoo;
 
 use Moose::Role;
 

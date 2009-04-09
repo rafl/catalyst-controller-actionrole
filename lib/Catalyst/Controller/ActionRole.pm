@@ -66,7 +66,7 @@ C<[ 'Catalyst::Action::Role::' ]>.  See L</role prefix searching>.
 =cut
 
 __PACKAGE__->mk_classdata(qw/_action_role_prefix/);
-__PACKAGE__->_action_role_prefix([ 'Catalyst::Action::Role::' ]);
+__PACKAGE__->_action_role_prefix([ 'Catalyst::ActionRole::' ]);
 
 =attr _action_roles
 
@@ -135,7 +135,7 @@ sub _expand_role_shortname {
     my ($self, @shortnames) = @_;
     my $app = Catalyst::Utils::class2appclass(blessed($self) || $self);
 
-    my @prefixes = (qq{${app}::Action::Role::}, @{$self->_action_role_prefix});
+    my @prefixes = (qq{${app}::ActionRole::}, @{$self->_action_role_prefix});
 
     return String::RewritePrefix->rewrite(
         { ''  => sub {

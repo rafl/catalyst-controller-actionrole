@@ -8,10 +8,10 @@ use lib "$FindBin::Bin/lib";
 use Catalyst::Test 'TestApp';
 
 my %roles = (
-    foo  => 'TestApp::Action::Role::Moo',
-    bar  => 'TestApp::Action::Role::Moo',
+    foo  => 'TestApp::ActionRole::Moo',
+    bar  => 'TestApp::ActionRole::Moo',
     baz  => 'Moo',
-    quux => 'Catalyst::Action::Role::Zoo',
+    quux => 'Catalyst::ActionRole::Zoo',
 );
 
 while (my ($path, $role) = each %roles) {

@@ -1,4 +1,4 @@
-package TestApp::Action::Role::Kooh;
+package TestApp::ActionRole::Kooh;
 
 use Moose::Role;
 
