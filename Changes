@@ -1,3 +1,7 @@
+0.09  Fri, 10 Apr 2009 01:45:48 +0200
+  * Change the default role search path from ::Action::Role:: to
+    ::ActionRole::.
+
 0.08  Thu, 02 Apr 2009 12:00:59 -0700
   * Minor POD tweaks (hdp)
 
