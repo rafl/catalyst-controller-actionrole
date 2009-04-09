@@ -30,7 +30,7 @@ For that a C<Does> attribute is provided. That attribute takes an argument,
 that determines the role, which is going to be applied. If that argument is
 prefixed with C<+>, it is assumed to be the full name of the role. If it's
 prefixed with C<~>, the name of your application followed by
-C<::Action::Role::> is prepended. If it isn't prefixed with C<+> or C<~>,
+C<::ActionRole::> is prepended. If it isn't prefixed with C<+> or C<~>,
 the role name will be searched for in C<@INC> according to the rules for
 L<role prefix searching|/ROLE PREFIX SEARCHING>.
 
@@ -45,15 +45,15 @@ without specifying the C<Does> keyword in every action definition:
         action_roles => ['Foo', '~Bar'],
     );
 
-    # has Catalyst::Action::Role::Foo and MyApp::Action::Role::Bar applied
-    # if MyApp::Action::Role::Foo exists and is loadable, it will take
-    # precedence over Catalyst::Action::Role::Foo
+    # has Catalyst::ActionRole::Foo and MyApp::ActionRole::Bar applied
+    # if MyApp::ActionRole::Foo exists and is loadable, it will take
+    # precedence over Catalyst::ActionRole::Foo
     sub moo : Local { ... }
 
 =head1 ROLE PREFIX SEARCHING
 
 Roles specified with no prefix are looked up under a set of role prefixes.  The
-first prefix is always C<MyApp::Action::Role::> (with C<MyApp> replaced as
+first prefix is always C<MyApp::ActionRole::> (with C<MyApp> replaced as
 appropriate for your application); the following prefixes are taken from the
 C<_action_role_prefix> attribute.
 
@@ -61,7 +61,7 @@ C<_action_role_prefix> attribute.
 
 This class attribute stores an array reference of role prefixes to search for
 role names in if they aren't prefixed with C<+> or C<~>. It defaults to
-C<[ 'Catalyst::Action::Role::' ]>.  See L</role prefix searching>.
+C<[ 'Catalyst::ActionRole::' ]>.  See L</role prefix searching>.
 
 =cut
 
