@@ -99,13 +99,11 @@ sub _build__action_roles {
     return \@roles;
 }
 
-around new => sub {
-    my $next = shift;
-    my $self = $next->(@_);
+sub BUILD {
+    my $self = shift;
     # force this to run at object creation time
     $self->_action_roles;
-    return $self;
-};
+}
 
 sub create_action {
     my ($self, %args) = @_;
