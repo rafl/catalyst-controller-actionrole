@@ -154,4 +154,12 @@ sub _parse_Does_attr {
     return Does => $self->_expand_role_shortname($value);
 }
 
+=begin Pod::Coverage
+
+  BUILD
+
+=end Pod::Coverage
+
+=cut
+
 1;
