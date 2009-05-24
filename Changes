@@ -1,3 +1,6 @@
+0.11  Sun, 24 May 2009 17:57:15 +0200
+  * Retain compatibility with latest Catalyst-Runtime (NAKAGAWA Masaki).
+
 0.10  Fri, 10 Apr 2009 01:46:36 +0200
   * No changes since 0.09, except for actually including the changelog entries.
 
