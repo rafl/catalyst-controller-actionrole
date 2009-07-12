@@ -133,7 +133,8 @@ sub _expand_role_shortname {
     my ($self, @shortnames) = @_;
     my $app = Catalyst::Utils::class2appclass(blessed($self) || $self);
 
-    my @prefixes = (qq{${app}::ActionRole::}, @{$self->_action_role_prefix});
+    my $prefix = $self->can('_action_role_prefix') ? $self->_action_role_prefix : ['Catalyst::ActionRole::'];
+    my @prefixes = (qq{${app}::ActionRole::}, @$prefix);
 
     return String::RewritePrefix->rewrite(
         { ''  => sub {
