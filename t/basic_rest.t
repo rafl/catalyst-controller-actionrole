@@ -3,8 +3,8 @@ use warnings;
 use Test::More;
 
 BEGIN {
-    if (!eval {require Catalyst::Action::REST;}) {
-        plan skip_all => 'This test needs Catalyst::Action::REST';
+    if (!eval {require Catalyst::Action::REST; Catalyst::Action::REST->VERSION(0.74)}) {
+        plan skip_all => 'This test needs Catalyst::Action::REST >=0.74';
     }
 
     plan tests => 3;
