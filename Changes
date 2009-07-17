@@ -1,3 +1,14 @@
+0.12  Sat, 18 Jul 2009 00:41:15 +0100
+
+  * More correct method for getting the app class. Can't test this yet,
+    as the canonical example ($self being an anon class) doesn't work in
+    core Catalyst yet :(
+
+  * Do not need an _action_role_prefix method, so that in future it is easier to
+    pull the code out into a role.
+
+  * Add tests for compatibility when used with Action::REST
+
 0.11  Sun, 24 May 2009 17:57:15 +0200
   * Retain compatibility with latest Catalyst-Runtime (NAKAGAWA Masaki).
 
