@@ -78,18 +78,23 @@ performed.
 =cut
 
 has _action_role_args => (
-    is         => 'ro',
+    traits     => [qw(Array)],
     isa        => ArrayRef[Str],
     init_arg   => 'action_roles',
-    auto_deref => 1,
+    default    => sub { [] },
+    handles    => {
+        _action_role_args => 'elements',
+    },
 );
 
 has _action_roles => (
-    is         => 'ro',
+    traits     => [qw(Array)],
     isa        => ArrayRef[RoleName],
     init_arg   => undef,
     lazy_build => 1,
-    auto_deref => 1,
+    handles    => {
+        _action_roles => 'elements',
+    },
 );
 
 sub _build__action_roles {
