@@ -1,3 +1,6 @@
+0.14  Sun, 02 May 2010 00:58:39 +0200
+  * Add repository metadata (Tomas Doran).
+
 0.13  Sat, 20 Mar 2010 12:23:14 +0100
   * Make the reader methods for _action_roles and _action_role_args not be
     context-sensitive and always return a plain list.
