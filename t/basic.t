@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 12;
+use Test::More;
 
 use FindBin;
 use lib "$FindBin::Bin/lib";
@@ -15,8 +15,12 @@ my %roles = (
 );
 
 while (my ($path, $role) = each %roles) {
-    my $resp = request("/foo/${path}");
-    ok($resp->is_success);
-    is($resp->content, $role);
-    is($resp->header('X-Affe'), 'Tiger');
+    for my $controller (qw(foo bar)) {
+        my $resp = request("/${controller}/${path}");
+        ok($resp->is_success);
+        is($resp->content, $role);
+        is($resp->header('X-Affe'), 'Tiger');
+    }
 }
+
+done_testing;
