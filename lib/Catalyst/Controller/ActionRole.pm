@@ -34,8 +34,8 @@ C<::ActionRole::> is prepended. If it isn't prefixed with C<+> or C<~>,
 the role name will be searched for in C<@INC> according to the rules for
 L<role prefix searching|/ROLE PREFIX SEARCHING>.
 
-Additionally it's possible to to apply roles to B<all> actions of a controller
-without specifying the C<Does> keyword in every action definition:
+It's possible to to apply roles to B<all> actions of a controller without
+specifying the C<Does> keyword in every action definition:
 
     package MyApp::Controller::Bar
 
@@ -49,6 +49,32 @@ without specifying the C<Does> keyword in every action definition:
     # if MyApp::ActionRole::Foo exists and is loadable, it will take
     # precedence over Catalyst::ActionRole::Foo
     sub moo : Local { ... }
+
+Additionally, roles can be applied to selected actions without specifying
+C<Does> using L<Catalyst::Controller/action> and configured with
+L<Catalyst::Controller/action_args>:
+
+    package MyApp::Controller::Baz;
+
+    use parent qw/Catalyst::Controller::ActionRole/;
+
+    __PACKAGE__->config(
+        action_roles => [qw( Foo )],
+        action       => {
+            some_action    => { Does => [qw( ~Bar )] },
+            another_action => { Does => [qw( +MyActionRole::Baz )] },
+        },
+        action_args  => {
+            another_action => { customarg => 'arg1' },
+        }
+    );
+
+    # has Catalyst::ActionRole::Foo and MyApp::ActionRole::Bar applied
+    sub some_action : Local { ... }
+
+    # has Catalyst::ActionRole::Foo and MyActionRole::Baz applied
+    # and associated action class would get additional arguments passed
+    sub another_action : Local { ... }
 
 =head1 ROLE PREFIX SEARCHING
 
