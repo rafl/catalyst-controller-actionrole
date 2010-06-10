@@ -160,7 +160,13 @@ around create_action => sub {
         $action_class = $meta->name;
     }
 
-    return $action_class->new(\%args);
+    my $action_args = $self->config->{action_args};
+    my %extra_args = (
+        %{ $action_args->{'*'}           || {} },
+        %{ $action_args->{ $args{name} } || {} },
+    );
+
+    return $action_class->new({ %extra_args, %args });
 };
 
 sub _expand_role_shortname {
