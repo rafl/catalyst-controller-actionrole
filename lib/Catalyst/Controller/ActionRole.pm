@@ -17,7 +17,10 @@ extends 'Catalyst::Controller';
 
     package MyApp::Controller::Foo;
 
-    use parent qw/Catalyst::Controller::ActionRole/;
+    use Moose;
+    use namespace::autoclean;
+
+    BEGIN { extends 'Catalyst::Controller::ActionRole' }
 
     sub bar : Local Does('Moo') { ... }
 
@@ -39,7 +42,10 @@ specifying the C<Does> keyword in every action definition:
 
     package MyApp::Controller::Bar
 
-    use parent qw/Catalyst::Controller::ActionRole/;
+    use Moose;
+    use namespace::autoclean;
+
+    BEGIN { extends 'Catalyst::Controller::ActionRole' }
 
     __PACKAGE__->config(
         action_roles => ['Foo', '~Bar'],
@@ -60,7 +66,10 @@ L<Catalyst::Controller/action_args>:
 
     package MyApp::Controller::Baz;
 
-    use parent qw/Catalyst::Controller::ActionRole/;
+    use Moose;
+    use namespace::autoclean;
+
+    BEGIN { extends 'Catalyst::Controller::ActionRole' }
 
     __PACKAGE__->config(
         action_roles => [qw( Foo )],
