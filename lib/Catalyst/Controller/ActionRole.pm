@@ -5,7 +5,7 @@ use Moose;
 use Class::MOP;
 use Catalyst::Utils;
 use Moose::Meta::Class;
-use String::RewritePrefix;
+use String::RewritePrefix 0.004;
 use MooseX::Types::Moose qw/ArrayRef Str RoleName/;
 use List::Util qw(first);
 
