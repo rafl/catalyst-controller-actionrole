@@ -189,19 +189,24 @@ sub _expand_role_shortname {
     my ($self, @shortnames) = @_;
     my $app = $self->_application;
 
-    my $prefix = $self->can('_action_role_prefix') ? $self->_action_role_prefix : ['Catalyst::ActionRole::'];
+    my $prefix = $self->can('_action_role_prefix')
+        ? $self->_action_role_prefix
+        : ['Catalyst::ActionRole::'];
+
     my @prefixes = (qq{${app}::ActionRole::}, @$prefix);
 
     return String::RewritePrefix->rewrite(
-        { ''  => sub {
-            my $loaded = Class::MOP::load_first_existing_class(
-                map { "$_$_[0]" } @prefixes
-            );
-            return first { $loaded =~ /^$_/ }
-              sort { length $b <=> length $a } @prefixes;
-          },
-          '~' => $prefixes[0],
-          '+' => '' },
+        {
+            ''  => sub {
+                my $loaded = Class::MOP::load_first_existing_class(
+                    map { "$_$_[0]" } @prefixes
+                );
+                return first { $loaded =~ /^$_/ }
+                    sort { length $b <=> length $a } @prefixes;
+            },
+            '~' => $prefixes[0],
+            '+' => '',
+        },
         @shortnames,
     );
 }
