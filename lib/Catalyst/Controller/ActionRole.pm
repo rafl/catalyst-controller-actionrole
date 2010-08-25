@@ -142,9 +142,7 @@ around create_action => sub {
     return $self->$orig(%args)
         if $args{name} =~ /^_(DISPATCH|BEGIN|AUTO|ACTION|END)$/;
 
-    my $action_class = exists $args{attributes}->{ActionClass}
-        ? $args{attributes}->{ActionClass}->[0]
-        : $self->_action_class;
+    my $action_class = $self->action_class(%args);
 
     Class::MOP::load_class($action_class);
 
