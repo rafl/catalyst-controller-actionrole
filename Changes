@@ -1,3 +1,9 @@
+  * Improvements to documentation (William King, Tomas Doran)
+  * Don't apply roles to special internal catalyst actions
+    (Alex J. G. Burzyński)
+  * Honour action_args configuration to allow setting role attributes
+    (John Napiorkowski)
+
 0.14  Sun, 02 May 2010 00:58:39 +0200
   * Add repository metadata (Tomas Doran).
 
