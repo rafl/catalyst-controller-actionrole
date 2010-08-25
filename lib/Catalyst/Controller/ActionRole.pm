@@ -148,8 +148,6 @@ around create_action => sub {
 
     my $action_class = $self->action_class(%args);
 
-    Class::MOP::load_class($action_class);
-
     my @roles = $self->gather_action_roles(%args);
     return $self->$orig(%args) unless @roles;
 
