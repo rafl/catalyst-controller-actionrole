@@ -110,8 +110,11 @@ sub BUILD {
     $self->_action_roles;
 }
 
-sub create_action {
-    my ($self, %args) = @_;
+around create_action => sub {
+    my ($orig, $self, %args) = @_;
+
+    return $self->$orig(%args)
+        if $args{name} =~ /^_(DISPATCH|BEGIN|AUTO|ACTION|END)$/;
 
     my $class = exists $args{attributes}->{ActionClass}
         ? $args{attributes}->{ActionClass}->[0]
@@ -132,7 +135,7 @@ sub create_action {
     }
 
     return $class->new(\%args);
-}
+};
 
 sub _expand_role_shortname {
     my ($self, @shortnames) = @_;
