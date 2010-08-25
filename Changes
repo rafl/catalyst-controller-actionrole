@@ -1,3 +1,4 @@
+0.15  Thu, 26 Aug 2010 00:22:42 +0200
   * Improvements to documentation (William King, Tomas Doran)
   * Don't apply roles to special internal catalyst actions
     (Alex J. G. Burzyński)
