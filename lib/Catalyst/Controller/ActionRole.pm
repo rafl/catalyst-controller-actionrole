@@ -116,25 +116,25 @@ around create_action => sub {
     return $self->$orig(%args)
         if $args{name} =~ /^_(DISPATCH|BEGIN|AUTO|ACTION|END)$/;
 
-    my $class = exists $args{attributes}->{ActionClass}
+    my $action_class = exists $args{attributes}->{ActionClass}
         ? $args{attributes}->{ActionClass}->[0]
         : $self->_action_class;
 
-    Class::MOP::load_class($class);
+    Class::MOP::load_class($action_class);
 
     my @roles = ($self->_action_roles, @{ $args{attributes}->{Does} || [] });
     if (@roles) {
         Class::MOP::load_class($_) for @roles;
-        my $meta = Moose::Meta::Class->initialize($class)->create_anon_class(
-            superclasses => [$class],
+        my $meta = Moose::Meta::Class->initialize($action_class)->create_anon_class(
+            superclasses => [$action_class],
             roles        => \@roles,
             cache        => 1,
         );
         $meta->add_method(meta => sub { $meta });
-        $class = $meta->name;
+        $action_class = $meta->name;
     }
 
-    return $class->new(\%args);
+    return $action_class->new(\%args);
 };
 
 sub _expand_role_shortname {
