@@ -150,7 +150,7 @@ around create_action => sub {
 
     Class::MOP::load_class($action_class);
 
-    my @roles = ($self->_action_roles, @{ $args{attributes}->{Does} || [] });
+    my @roles = $self->gather_action_roles(%args);
     if (@roles) {
         Class::MOP::load_class($_) for @roles;
         my $meta = Moose::Meta::Class->initialize($action_class)->create_anon_class(
@@ -170,6 +170,15 @@ around create_action => sub {
 
     return $action_class->new({ %extra_args, %args });
 };
+
+sub gather_action_roles {
+    my ($self, %args) = @_;
+
+    return (
+        $self->_action_roles,
+        @{ $args{attributes}->{Does} || [] },
+    );
+}
 
 sub _expand_role_shortname {
     my ($self, @shortnames) = @_;
