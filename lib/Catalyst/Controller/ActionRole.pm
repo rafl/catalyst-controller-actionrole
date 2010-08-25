@@ -164,6 +164,12 @@ around create_action => sub {
     return $action_class->new({ %extra_args, %args });
 };
 
+=method gather_action_roles(\%action_args)
+
+Gathers the list of roles to apply to an action with the given C<%action_args>.
+
+=cut
+
 sub gather_action_roles {
     my ($self, %args) = @_;
 
