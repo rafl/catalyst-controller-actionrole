@@ -151,16 +151,16 @@ around create_action => sub {
     Class::MOP::load_class($action_class);
 
     my @roles = $self->gather_action_roles(%args);
-    if (@roles) {
-        Class::MOP::load_class($_) for @roles;
-        my $meta = Moose::Meta::Class->initialize($action_class)->create_anon_class(
-            superclasses => [$action_class],
-            roles        => \@roles,
-            cache        => 1,
-        );
-        $meta->add_method(meta => sub { $meta });
-        $action_class = $meta->name;
-    }
+    return $self->$orig(%args) unless @roles;
+
+    Class::MOP::load_class($_) for @roles;
+    my $meta = Moose::Meta::Class->initialize($action_class)->create_anon_class(
+        superclasses => [$action_class],
+        roles        => \@roles,
+        cache        => 1,
+    );
+    $meta->add_method(meta => sub { $meta });
+    $action_class = $meta->name;
 
     my $action_args = $self->config->{action_args};
     my %extra_args = (
